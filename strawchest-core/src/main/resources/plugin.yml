@@ -1,0 +1,17 @@
+name: ElesiaChest
+main: com.elesia.chest.core.ElesiaChest
+version: 0.0.1-ALPHA
+authors:
+  - Eclixal
+  - Uicias
+api-version: 1.14
+depend:
+  - ElenoxCore
+commands:
+  givekey:
+    description: Permet aux Administrateurs de give des clés
+  cle:
+    description: Permet aux joueurs de récuperer les items en attentes
+    aliases:
+      - cles
+      - crclaim
