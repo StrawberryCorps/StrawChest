@@ -23,11 +23,14 @@ public class StrawChest extends bzh.strawberry.chest.api.StrawChest {
     @Override
     public void onEnable() {
         INSTANCE = this;
+
         Objects.requireNonNull(getServer().getPluginCommand("givekey")).setExecutor(new GiveKeyCommand());
         Objects.requireNonNull(getServer().getPluginCommand("cle")).setExecutor(new CleCommand());
+
         getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
         getServer().getPluginManager().registerEvents(new BlockBreak(), this);
         getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
+
         this.chests = new ArrayList<>();
         new ItemToClaimManager();
     }
