@@ -1,14 +1,13 @@
 package bzh.strawberry.chest.core.manager;
 
+import bzh.strawberry.api.StrawAPI;
 import bzh.strawberry.chest.api.StrawChest;
 import bzh.strawberry.chest.api.manager.IItemToclaim;
 import bzh.strawberry.chest.api.utils.JsonItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,13 +46,24 @@ public class ItemToClaim implements IItemToclaim {
     @Override
     public void removeItem(int ind) {
         this.map.remove(ind);
+        Connection connection = null;
+        PreparedStatement ps = null;
         try {
-            // @TODO SGBD
-//             PreparedStatement ps = prepareStatement("DELETE FROM " + this.nomTable + " WHERE `id` = ?");
-//            ps.setInt(1, ind);
-//            ps.executeUpdate();
+            connection = StrawAPI.getAPI().getDataFactory().getDataSource().getConnection();
+            ps = connection.prepareStatement("DELETE FROM " + this.nomTable + " WHERE `id` = ?");
+            ps.setInt(1, ind);
+            ps.executeUpdate();
         } catch (Exception e) {
             player.sendMessage(StrawChest.getInstance().getPrefix() + "§cUne erreur est survenue..." + e.getMessage());
+        } finally {
+            try {
+                assert ps != null;
+                ps.close();
+
+                connection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
     }
 
@@ -78,17 +88,30 @@ public class ItemToClaim implements IItemToclaim {
     public int addNouvelItem(ItemStack item) {
         player.sendMessage(StrawChest.getInstance().getPrefix() + "§8Vous avez un nouvel item en attente : §e/cle");
         int ret = -1;
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet resultSet = null;
         try {
-            // @TODO SGBD
-//            PreparedStatement ps = .prepareStatement("INSERT INTO " + this.nomTable + " (`player_id`, `item`) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS);
-//            ps.setInt(1, this.localId);
-//            ps.setString(2, JsonItemStack.toJson(item));
-//            ps.executeUpdate();
-//            ResultSet rs = ps.getGeneratedKeys();
-//            if(rs.next())
-//                ret = rs.getInt(1);
+            connection = StrawAPI.getAPI().getDataFactory().getDataSource().getConnection();
+            ps = connection.prepareStatement("INSERT INTO " + this.nomTable + " (`player_id`, `item`) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, this.localId);
+            ps.setString(2, JsonItemStack.toJson(item));
+            ps.executeUpdate();
+            resultSet = ps.getGeneratedKeys();
+            if (resultSet.next())
+                ret = resultSet.getInt(1);
         } catch (Exception e) {
             player.sendMessage(StrawChest.getInstance().getPrefix() + "§cUne erreur est survenue..." + e.getMessage());
+        } finally {
+            try {
+                assert resultSet != null;
+                resultSet.close();
+                assert ps != null;
+                ps.close();
+                connection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
 
         return ret;
