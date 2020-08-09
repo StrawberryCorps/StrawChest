@@ -14,7 +14,7 @@ public abstract class StrawChest extends JavaPlugin {
     }
 
     /**
-     * Recupérer l'instance de l'API d'ElesiaChest
+     * Recupérer l'instance de l'API d'StrawChest
      *
      * @return intance
      */

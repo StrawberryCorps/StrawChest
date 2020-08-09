@@ -1,12 +1,12 @@
-name: ElesiaChest
-main: com.elesia.chest.core.ElesiaChest
+name: StrawChest
+main: bzh.strawberry.chest.core.StrawChest
 version: 0.0.1-ALPHA
 authors:
   - Eclixal
   - Uicias
 api-version: 1.15
 depend:
-  - ElenoxCore
+  - StrawCore
 commands:
   givekey:
     description: Permet aux Administrateurs de give des clés
