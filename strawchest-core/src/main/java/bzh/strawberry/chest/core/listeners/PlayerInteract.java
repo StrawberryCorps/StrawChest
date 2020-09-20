@@ -5,12 +5,12 @@ import bzh.strawberry.chest.api.StrawChest;
 import bzh.strawberry.chest.core.gui.RewardGUI;
 import bzh.strawberry.chest.core.manager.Chest;
 import bzh.strawberry.chest.core.manager.ItemToClaimManager;
-import net.minecraft.server.v1_15_R1.*;
+import net.minecraft.server.v1_16_R2.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.craftbukkit.v1_15_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_16_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -92,23 +92,23 @@ public class PlayerInteract implements Listener {
                     } else {
                         player.setVelocity(player.getEyeLocation().getDirection().multiply(-1.3));
                         player.sendMessage(bzh.strawberry.chest.core.StrawChest.INSTANCE.getPrefix() + "§cVous devez avoir une clée pour ouvrir ce coffre \u2620");
-                        EntityLightning entityLightning = new EntityLightning(((CraftPlayer) player).getHandle().getWorld(), event.getClickedBlock().getLocation().getX() + 0.5, event.getClickedBlock().getLocation().getY(), event.getClickedBlock().getLocation().getZ() + 0.5, true);
-                        entityLightning.setOnFire(0);
-                        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather(entityLightning));
+//                        EntityLightning entityLightning = new EntityLightning(((CraftPlayer) player).getHandle().getWorld(), event.getClickedBlock().getLocation().getX() + 0.5, event.getClickedBlock().getLocation().getY(), event.getClickedBlock().getLocation().getZ() + 0.5, true);
+//                        entityLightning.setOnFire(0);
+//                        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather(entityLightning));
                     }
                 } else {
                     player.setVelocity(player.getEyeLocation().getDirection().multiply(-1.3));
                     player.sendMessage(bzh.strawberry.chest.core.StrawChest.INSTANCE.getPrefix() + "§cVous devez avoir une clée pour ouvrir ce coffre \u2620");
-                    EntityLightning entityLightning = new EntityLightning(((CraftPlayer) player).getHandle().getWorld(), event.getClickedBlock().getLocation().getX() + 0.5, event.getClickedBlock().getLocation().getY(), event.getClickedBlock().getLocation().getZ() + 0.5, true);
-                    entityLightning.setOnFire(0);
-                    ((CraftPlayer) player).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather(entityLightning));
+//                    EntityLightning entityLightning = new EntityLightning(((CraftPlayer) player).getHandle().getWorld(), event.getClickedBlock().getLocation().getX() + 0.5, event.getClickedBlock().getLocation().getY(), event.getClickedBlock().getLocation().getZ() + 0.5, true);
+//                    entityLightning.setOnFire(0);
+//                    ((CraftPlayer) player).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather(entityLightning));
                 }
             } else {
                 player.setVelocity(player.getEyeLocation().getDirection().multiply(-1.3));
                 player.sendMessage(bzh.strawberry.chest.core.StrawChest.INSTANCE.getPrefix() + "§cVous devez avoir une clée pour ouvrir ce coffre \u2620");
-                EntityLightning entityLightning = new EntityLightning(((CraftPlayer) player).getHandle().getWorld(), event.getClickedBlock().getLocation().getX() + 0.5, event.getClickedBlock().getLocation().getY(), event.getClickedBlock().getLocation().getZ() + 0.5, true);
-                entityLightning.setOnFire(0);
-                ((CraftPlayer) player).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather(entityLightning));
+//                EntityLightning entityLightning = new EntityLightning(((CraftPlayer) player).getHandle().getWorld(), event.getClickedBlock().getLocation().getX() + 0.5, event.getClickedBlock().getLocation().getY(), event.getClickedBlock().getLocation().getZ() + 0.5, true);
+//                entityLightning.setOnFire(0);
+//                ((CraftPlayer) player).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather(entityLightning));
             }
         }
         if (event.getClickedBlock() != null && event.getAction().equals(Action.LEFT_CLICK_BLOCK) && event.getClickedBlock().getType().equals(Material.CHEST) && bzh.strawberry.chest.core.StrawChest.INSTANCE.getChest(event.getClickedBlock().getLocation()) != null) {
